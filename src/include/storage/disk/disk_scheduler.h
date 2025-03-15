@@ -81,7 +81,9 @@ class DiskScheduler {
    *
    * @return std::promise<bool>
    */
-  auto CreatePromise() -> DiskSchedulerPromise { return {}; };
+  auto CreatePromise() -> DiskSchedulerPromise {
+    return std::promise<bool>{};
+  };
 
   /**
    * @brief Increases the size of the database file to fit the specified number of pages.
