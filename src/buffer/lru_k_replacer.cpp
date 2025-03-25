@@ -79,8 +79,6 @@ auto LRUKReplacer::Evict() -> std::optional<frame_id_t> {
       last = node.end();
     }
   }
-  // Reduce number of evictable frame by 1.
-  curr_size_ -= 1;
 
   // Remove access history.
   Remove(evict_f);
@@ -124,6 +122,9 @@ void LRUKReplacer::Remove(frame_id_t frame_id) {
     );
   }
   node_store_.erase(frame_id);
+
+  // Reduce number of evictable frame by 1.
+  curr_size_ -= 1;
 }
 
 auto LRUKReplacer::Size() -> size_t {

@@ -95,6 +95,9 @@ class FrameHeader {
    * currently storing. This might allow you to skip searching for the corresponding (page ID, frame ID) pair somewhere
    * else in the buffer pool manager...
    */
+  page_id_t page_id_;
+
+  std::shared_mutex rwlock;
 };
 
 /**
@@ -170,5 +173,6 @@ class BufferPoolManager {
    * stored inside of it. Additionally, you may also want to implement a helper function that returns either a shared
    * pointer to a `FrameHeader` that already has a page's data stored inside of it, or an index to said `FrameHeader`.
    */
+  auto LoadPage(page_id_t page_id) -> bool;
 };
 }  // namespace bustub
